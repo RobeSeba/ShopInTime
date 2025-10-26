@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop in Time – Prototipo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@300;400;600;800&family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="estilo.css" rel="stylesheet">
+</head>
+<body>
+  <header class="top">
+    <div class="inner">
+      <a href="index.html" class="brand" style="text-decoration:none; color:inherit;"><div class="logo"></div><h1>Shop in Time</h1></a>
+      <div class="role-switch">
+        <button class="btn small ghost" data-role="home">Home</button>
+        <button class="btn small" data-role="final">Cliente Final</button>
+        <button class="btn small" data-role="admin">Empresa Admi</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="view-home" class="container">
+    <section class="hero card">
+      <div class="grid grid-2">
+        <div>
+          <h2 style="margin-top:0">Crea tu tienda en minutos</h2>
+          <p style="color:var(--muted)">Shop in Time es una plataforma que permite crear tiendas personalizadas de manera muy sencilla. Este prototipo incluye los 3 accesos: <b>Empresa Admi</b>, <b>Cliente Empresa</b> y <b>Cliente Final</b>.</p>
+          <div class="pilltabs" style="margin-top:12px">
+            <button class="active" onclick="switchView('view-client')">Comenzar como Cliente Empresa</button>
+            <button onclick="switchView('view-shop')">Ver una tienda (Cliente Final)</button>
+            <button onclick="switchView('view-admin')">Panel Empresa Admi</button>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="kpi"><div class="label">Tiendas creadas</div><div class="num" id="kpiStores">0</div></div>
+          <div class="kpi"><div class="label">Ventas totales</div><div class="num" id="kpiSales">0</div></div>
+          <div class="kpi"><div class="label">Ingresos totales</div><div class="num" id="kpiRevenue">S/ 0.00</div></div>
+          <div class="kpi"><div class="label">Productos en catálogo</div><div class="num" id="kpiProducts">0</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0">¿Qué incluye?</h3>
+      <ul>
+        <li>Selector de plantilla (3 estilos), color y tipografía.</li>
+        <li>Registro de empresa (RUC, Razón Social, rubro, representante, etc.).</li>
+        <li>Historia, redes, eslogan, métodos de pago y aceptación de plan (S/5, S/10, S/20).</li>
+        <li>Registro de productos (foto, nombre, descripción, precio, stock).</li>
+        <li>Vista de tienda pública con carrito y login/registro de cliente final.</li>
+        <li>Informe para la tienda: ventas, ingresos, inventario, fecha de socio, bitácora de ventas.</li>
+        <li>Panel Empresa Admi con filtros: todas, activas, poca actividad; y reporte de pagos por tienda.</li>
+      </ul>
+    </section>
+  </main>
+
+  <main id="view-shop" class="hidden">
+    <div id="shopRoot" class="card tpl-1" style="--primary:var(--primary); font-family:Inter">
+      <div class="shop-header">
+        <h2 id="shopTitle">Mi Tienda</h2>
+        <div class="flex">
+          <button class="btn" onclick="openCart()">Carrito (<span id="cartCount">0</span>)</button>
+        </div>
+      </div>
+      <div class="shop-grid" id="shopProducts"></div>
+    </div>
+  </main>
+
+  <main id="view-admin" class="admin-layout hidden">
+    <aside class="sidebar">
+      <h3 style="margin-top:0">Filtros</h3>
+      <div class="flex-col">
+        <button class="btn small" onclick="setAdminFilter('all')">Todas las tiendas</button>
+        <button class="btn small" onclick="setAdminFilter('active')">Tiendas activas</button>
+        <button class="btn small" onclick="setAdminFilter('low')">Poca actividad</button>
+        <button class="btn small" onclick="showAdminReport()">Reporte de pagos</button>
+      </div>
+      <div class="divider"></div>
+      <div class="flex-col">
+        <span class="label">Buscar tienda</span>
+        <input id="adminSearch" class="input" placeholder="Nombre o slug" oninput="renderAdminList()" />
+      </div>
+    </aside>
+    <section class="content">
+      <div class="card">
+        <h3 style="margin-top:0">Tiendas (Cliente Empresa)</h3>
+        <div id="adminStores" class="grid grid-3"></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h3 style="margin-top:0">Reporte de pagos</h3>
+        <table class="table" id="adminReportTable">
+          <thead><tr><th>Tienda</th><th>Meses transcurridos</th><th>Monto adeudado (S/)</th><th>Desde</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modalCart">
+    <div class="card">
+      <div class="spaced">
+        <h3 style="margin:0">Carrito</h3>
+        <button class="btn" onclick="closeModal('modalCart')">Cerrar</button>
+      </div>
+      <div id="cartLogin" class="flex-col">
+        <div class="label">Por favor regístrate o inicia sesión para continuar</div>
+        <div class="grid grid-2">
+          <div class="flex-col"><span class="label">Nombre</span><input id="cNombre" class="input"/></div>
+          <div class="flex-col"><span class="label">Correo</span><input id="cCorreo" class="input" type="email"/></div>
+          <div class="flex-col"><span class="label">Contraseña</span><input id="cPass" class="input" type="password"/></div>
+        </div>
+        <div class="flex" style="margin-top:8px">
+          <button class="btn primary" onclick="customerLogin()">Continuar</button>
+        </div>
+      </div>
+      <div id="cartBody" class="hidden">
+        <div id="cartItems"></div>
+        <div class="spaced" style="margin-top:12px">
+          <div class="label">Total a pagar</div>
+          <div class="num" id="cartTotal">S/ 0.00</div>
+        </div>
+        <div class="divider"></div>
+        <div class="flex" style="gap:8px">
+          <button class="btn primary" onclick="openPayment()">Pagar</button>
+          <button class="btn ghost" onclick="closeModal('modalCart')">Seguir comprando</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalPayment">
+    <div class="card">
+      <div class="spaced">
+        <h3 style="margin:0">Métodos de pago</h3>
+        <button class="btn" onclick="closeModal('modalPayment')">Cerrar</button>
+      </div>
+      <div id="paymentMethods" class="grid grid-2"></div>
+      <div class="divider"></div>
+      <button class="btn primary" onclick="confirmCheckout()">Confirmar pago</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="funcion.js"></script>
+</body>
+</html>
+
+

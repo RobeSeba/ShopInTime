@@ -1,0 +1,221 @@
+ :root{
+      --primary:#1b2a49;      /* azul noche */
+      --accent:#f5c542;       /* amarillo bordes */
+      --bg:#f8f8f5;           /* blanco hueso */
+      --panel:#ffffff;        /* panel blanco */
+      --text:#2a2a2a;         /* texto principal */
+      --muted:#6e6e6e;        /* texto secundario */
+      --border:#e6e2d9;       /* borde suave */
+      --ok:#1b8c56;
+      --warn:#f5c542;
+      --danger:#d43f3f;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,#fdfdfb,#f8f8f5); color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:16px}
+    .card{background:var(--panel); border:1px solid var(--accent); border-radius:16px; padding:16px; box-shadow:0 4px 18px rgba(0,0,0,.06)}
+
+    /* ======= NAV ======= */
+    header.top{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom:2px solid var(--accent)}
+    header.top .inner{max-width:1200px; margin:0 auto; padding:12px 16px; display:flex; align-items:center; gap:12px; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:10px}
+    .brand .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 180deg at 50% 50%, #1b2a49, #3b6ff5, #f5c542); box-shadow:0 0 12px rgba(27,42,73,.3)}
+    .brand h1{font-size:1.05rem;margin:0;color:var(--primary)}
+
+    nav.tabs{display:flex; gap:8px}
+    .tab{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:2px solid var(--accent);background:#fff;color:var(--text);cursor:pointer;transition:.2s}
+    .tab[aria-current="page"], .tab:hover{box-shadow:0 6px 16px rgba(27,42,73,.15); transform:translateY(-1px)}
+
+    /* ======= LAYOUT ======= */
+    .layout{display:grid; grid-template-columns: 1fr; gap:16px}
+    @media (min-width:960px){ .layout{ grid-template-columns: 20% 1fr } }
+    .sidebar{background:#fff; border:1px solid var(--accent); border-radius:16px; padding:12px; position:sticky; top:84px; height:fit-content}
+    .content{min-height:60vh}
+
+    .input, select{width:100%; padding:10px 12px; border-radius:12px; border:2px solid var(--accent); background:#ffffff; color:var(--text)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:12px;border:2px solid var(--accent);background:#ffffff;color:var(--text);cursor:pointer;transition:.2s}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 18px rgba(27,42,73,.15)}
+    .btn.primary{background:var(--primary); color:white; border-color:transparent}
+    .btn.ghost{background:transparent}
+    .btn.small{padding:6px 10px; border-radius:10px; font-size:.9rem}
+    .label{font-size:.9rem;color:var(--muted); margin-bottom:6px}
+
+    /* ======= CAROUSEL ======= */
+    .carousel{position:relative; overflow:hidden; border-radius:16px; border:2px solid var(--accent)}
+    .carousel-track{display:flex; transition: transform .5s ease}
+    .carousel-slide{min-width:100%; position:relative}
+    .carousel-slide img{width:100%; height:280px; object-fit:cover; display:block}
+    .carousel-cta{position:absolute; bottom:12px; left:12px; display:flex; gap:8px; flex-wrap:wrap}
+    .carousel button.nav{position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.9); border:2px solid var(--accent); padding:8px 12px; border-radius:10px; cursor:pointer}
+    .carousel button.prev{left:8px}
+    .carousel button.next{right:8px}
+
+    /* ======= STORE GRID ======= */
+    .stores{display:grid; grid-template-columns: 1fr; gap:16px}
+    @media (min-width:720px){ .stores{ grid-template-columns:1fr 1fr } }
+    .store-card{border:2px solid var(--accent); border-radius:14px; overflow:hidden; background:#fff}
+    .store-card img{width:100%; height:160px; object-fit:cover; display:block}
+    .store-card .pinfo{padding:12px}
+    .store-card .title{font-weight:700}
+
+    /* ======= PRODUCTS GRID (store view) ======= */
+    .products{display:grid; grid-template-columns: 1fr; gap:16px}
+    @media (min-width:720px){ .products{ grid-template-columns:1fr 1fr 1fr } }
+    .product{border:2px solid var(--accent); border-radius:14px; overflow:hidden; background:#fff}
+    .product img{width:100%; height:140px; object-fit:cover; display:block}
+    .product .pinfo{padding:12px}
+    .chip{display:inline-block; padding:4px 8px; border-radius:999px; background:#fffdf5; border:2px solid var(--accent); font-size:.8rem}
+
+    /* ======= PANELS ======= */
+    .hidden{display:none}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    /* ======= MODAL TIENDAS ======= */
+    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.2); backdrop-filter: blur(4px);}
+    .modal.open{display:flex}
+    .modal .card{width:min(640px,90vw)}
+
+    /* ======= CART ======= */
+    .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
+
+    /* ===== Overrides minimalistas (pegar después de tu CSS) ===== */
+:root{
+  --night:#0f1c36;                     /* azul noche profundo */
+  --line:rgba(15,28,54,.08);           /* líneas casi invisibles */
+}
+
+body{
+  background:#fff;                     /* más limpio que el degradado */
+  letter-spacing:.1px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Encabezado: azul noche | solo letras y logo */
+header.top{
+  background:rgba(15,28,54,.96);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+header.top .inner{ padding:12px 16px; }
+.brand .logo{
+  width:30px;height:30px;border-radius:8px;
+  background:conic-gradient(from 180deg at 50% 50%, #0f1c36, #254a9d, #f5c542);
+  box-shadow:none;
+}
+.brand h1{
+  margin:0;
+  color:var(--accent);                 /* nombre de tienda a la izquierda en amarillo */
+  font-weight:700;
+}
+
+/* Botones de la derecha (nav tabs): blancos -> hover amarillo */
+nav.tabs .tab{
+  background:#fff;
+  color:var(--night);
+  border:1px solid var(--line);        /* línea sutil */
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+}
+nav.tabs .tab:hover,
+nav.tabs .tab[aria-current="page"]{
+  background:var(--accent);            /* amarillo al pasar el cursor / activo */
+  color:var(--night);
+  border-color:transparent;
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(15,28,54,.10);
+}
+
+/* Si usas .btn en el header, mesma lógica */
+header.top .btn{
+  background:#fff; color:var(--night);
+  border:1px solid var(--line);
+}
+header.top .btn:hover{
+  background:var(--accent); color:var(--night);
+  border-color:transparent;
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(15,28,54,.10);
+}
+
+/* Bordes y superficies: sutiles y limpios */
+.card, .sidebar, .store-card, .product, .input, select,
+.modal .card, .chip, .content, .row, .container,
+.carousel, .store-card .pinfo, .product .pinfo{
+  border-color:var(--line) !important;
+  border-width:1px !important;
+  box-shadow:0 6px 20px rgba(0,0,0,.05);
+}
+
+/* Inputs minimalistas */
+.input, select{
+  background:#fff;
+  color:var(--text);
+}
+
+/* Carrusel: ancho total, flechas sin fondo blanco */
+.carousel{
+  width:100vw;                         /* ocupa todo el ancho de pantalla */
+  margin-left:50%;
+  transform:translateX(-50%);
+  border:1px solid var(--line);        /* borde ultra sutil */
+  border-radius:16px;
+  overflow:hidden;
+}
+.carousel-slide img{
+  width:100%;
+  height:clamp(280px, 58vh, 640px);
+  object-fit:cover;
+  display:block;
+}
+.carousel button.nav{
+  background:transparent !important;   /* sin fondo blanco */
+  border:none !important;
+  box-shadow:none !important;
+  color:#fff;                          /* flechas blancas sobre la imagen */
+  padding:0; width:44px; height:44px;
+  display:grid; place-items:center;
+  transition:transform .15s ease, opacity .15s ease;
+  opacity:.9;
+}
+.carousel button.nav:hover{
+  transform:scale(1.06);
+  opacity:1;
+}
+
+/* Tarjetas de tiendas y productos: diseño minimal */
+.store-card, .product{
+  background:#fff;
+  overflow:hidden;
+  border-radius:14px;
+}
+.store-card img, .product img{ display:block }
+
+/* Tipografía y micro-interacciones */
+a{ position:relative; }
+a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left;
+  transition:transform .18s ease;
+}
+a:hover::after{ transform:scaleX(1); }
+
+/* Paneles y sidebar con líneas suaves */
+.sidebar{ background:#fff; }
+
+/* Reducir grosor visible en elementos con 2px previos */
+.tab, .btn, .chip, .input, select, .store-card, .product{
+  border-width:1px !important;
+}
+
+/* Accesibilidad */
+:focus-visible{
+  outline:2px solid rgba(245,197,66,.6);
+  outline-offset:2px;
+  border-radius:8px;
+}

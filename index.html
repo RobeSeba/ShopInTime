@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop in Time — Cliente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <style>
+    /* Encabezado: fondo azul noche */
+    header.top{
+      background: linear-gradient(90deg,#0f0c29,#302b63 60%,#24243e);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    header.top .inner{ align-items:center; }
+    #header-user{ display:flex; gap:12px; align-items:center; font-weight:600; color:#fff; }
+    #header-user .small{ font-size:.85rem; opacity:.9 }
+    .account-btn{ background:transparent; border:1px solid rgba(255,255,255,.15); color:#fff; padding:6px 10px; border-radius:8px; cursor:pointer }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="top">
+    <div class="inner">
+      <div class="brand"><div class="logo"></div><h1>Shop in Time</h1></div>
+      <nav class="tabs" role="tablist">
+        <button class="tab" id="tab-home" aria-controls="panel-home" aria-current="page">Home</button>
+        <button class="tab" id="tab-cart" aria-controls="panel-cart">Carrito</button>
+        <a href="login.html" class="tab" id="tab-login" aria-controls="panel-login">Iniciar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HOME PANEL -->
+    <section id="panel-home" class="panel active" role="tabpanel" aria-labelledby="tab-home">
+      <div class="card" style="margin-bottom:16px">
+        <!-- Carousel 4 imágenes -->
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=1200" alt="Oferta 1"/>
+              <div class="carousel-cta">
+                <a class="btn primary" href="#" data-offer-link="https://example.com/producto-a" target="_blank">Oferta A</a>
+                <a class="btn" href="#" data-offer-link="https://example.com/producto-b" target="_blank">Ver tienda</a>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200" alt="Oferta 2"/>
+              <div class="carousel-cta">
+                <a class="btn primary" href="#" data-offer-link="https://example.com/producto-c" target="_blank">Oferta B</a>
+                <a class="btn" href="#" data-offer-link="https://example.com/tienda-2" target="_blank">Ver tienda</a>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200" alt="Oferta 3"/>
+              <div class="carousel-cta">
+                <a class="btn primary" href="#" data-offer-link="https://example.com/producto-d" target="_blank">Oferta C</a>
+                <a class="btn" href="#" data-offer-link="https://example.com/tienda-3" target="_blank">Ver tienda</a>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200" alt="Oferta 4"/>
+              <div class="carousel-cta">
+                <a class="btn primary" href="#" data-offer-link="https://example.com/producto-e" target="_blank">Oferta D</a>
+                <a class="btn" href="#" data-offer-link="https://example.com/tienda-4" target="_blank">Ver tienda</a>
+              </div>
+            </div>
+          </div>
+          <button class="nav prev">◀</button>
+          <button class="nav next">▶</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <!-- Sidebar 20% -->
+        <aside class="sidebar">
+          <div class="label">Buscar productos</div>
+          <input id="searchInput" class="input" placeholder="Nombre de producto" />
+          <div style="margin-top:8px; display:flex; gap:8px">
+            <button class="btn" id="btnSearch">Buscar</button>
+            <button class="btn ghost" id="btnClear">Limpiar</button>
+          </div>
+          <hr style="border:none; border-top:1px solid var(--border); margin:14px 0">
+          <button class="btn" id="btnTiendas">Ver lista de tiendas</button>
+        </aside>
+
+        <!-- Content 80%: listado de tiendas -->
+        <section class="content">
+          <div class="card" id="storesView">
+            <div class="row" style="margin-bottom:8px">
+              <h3 style="margin:0">Tiendas registradas</h3>
+              <span class="label" id="storesCount">0 tiendas</span>
+            </div>
+            <div id="storesGrid" class="stores"></div>
+          </div>
+
+          <!-- Vista de una tienda (catálogo) -->
+          <div class="card hidden" id="storeCatalog">
+            <div class="row" style="margin-bottom:8px">
+              <div class="row" style="gap:8px">
+                <button class="btn small" id="btnBackStores">← Todas las tiendas</button>
+                <h3 id="storeTitle" style="margin:0"></h3>
+              </div>
+              <button class="btn" id="btnOpenCart">Carrito (<span id="cartCount">0</span>)</button>
+            </div>
+            <div id="productsGrid" class="products"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- CARRITO PANEL -->
+    <section id="panel-cart" class="panel" role="tabpanel" aria-labelledby="tab-cart">
+      <div class="card">
+        <div class="row">
+          <h3 style="margin:0">Tu carrito</h3>
+          <span class="label">Inicia sesión para completar la compra</span>
+        </div>
+        <div id="cartItems"></div>
+        <div class="row" style="margin-top:12px">
+          <div class="label">Total</div>
+          <div id="cartTotal" class="chip">S/ 0.00</div>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:8px">
+          <a href="login.html" class="btn primary" id="btnGoLogin">Ir a iniciar sesión</a>
+          <button class="btn" id="btnVaciar">Vaciar carrito</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGIN PANEL -->
+    <section id="panel-login" class="panel" role="tabpanel" aria-labelledby="tab-login">
+      <div class="card">
+        <h3 style="margin-top:0">Iniciar sesión</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+          <div>
+            <div class="label">Correo</div>
+            <input id="loginEmail" class="input" type="email" placeholder="correo@dominio.com" />
+          </div>
+          <div>
+            <div class="label">Contraseña</div>
+            <input id="loginPass" class="input" type="password" placeholder="••••••••" />
+          </div>
+          <div>
+            <div class="label">Rol de usuario</div>
+            <select id="loginRole" class="input">
+              <option value="C">Cliente Final (C…)</option>
+              <option value="E">Cliente Empresa (E…)</option>
+              <option value="A">Administrador (A…)</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:flex-end; gap:8px">
+            <button class="btn primary" id="btnLogin">Entrar</button>
+            <button class="btn" id="btnLogout">Cerrar sesión</button>
+          </div>
+        </div>
+        <div class="chip" id="sessionInfo" style="margin-top:12px">No has iniciado sesión</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: lista de tiendas -->
+  <div class="modal" id="modalTiendas">
+    <div class="card">
+      <div class="row">
+        <h3 style="margin:0">Tiendas disponibles</h3>
+        <button class="btn" id="btnCloseModal">Cerrar</button>
+      </div>
+      <div id="modalStores" class="stores" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

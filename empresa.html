@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop in Time – Prototipo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@300;400;600;800&family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="estilo.css" rel="stylesheet">
+</head>
+<body>
+  <header class="top">
+    <div class="inner">
+      <a href="index.html" class="brand" style="text-decoration:none; color:inherit;"><div class="logo"></div><h1>Shop in Time</h1></a>
+      <div class="role-switch">
+        <button class="btn small ghost" data-role="home">Home</button>
+        <button class="btn small" data-role="client">Cliente Empresa</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="view-home" class="container">
+    <section class="hero card">
+      <div class="grid grid-2">
+        <div>
+          <h2 style="margin-top:0">Crea tu tienda en minutos</h2>
+          <p style="color:var(--muted)">Shop in Time es una plataforma que permite crear tiendas personalizadas de manera muy sencilla. Este prototipo incluye los 3 accesos: <b>Empresa Admi</b>, <b>Cliente Empresa</b> y <b>Cliente Final</b>.</p>
+          <div class="pilltabs" style="margin-top:12px">
+            <button class="active" onclick="switchView('view-client')">Crear mi tienda</button>
+            
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="kpi"><div class="label">Tiendas creadas</div><div class="num" id="kpiStores">0</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-top:0">¿Qué incluye?</h3>
+      <ul>
+        <li>Selector de plantilla (3 estilos), color y tipografía.</li>
+        <li>Registro de empresa (RUC, Razón Social, rubro, representante, etc.).</li>
+        <li>Historia, redes, eslogan, métodos de pago y aceptación de plan (S/5, S/10, S/20).</li>
+        <li>Registro de productos (foto, nombre, descripción, precio, stock).</li>
+        <li>Vista de tienda pública con carrito y login/registro de cliente final.</li>
+        <li>Informe para la tienda: ventas, ingresos, inventario, fecha de socio, bitácora de ventas.</li>
+        <li>Panel Empresa Admi con filtros: todas, activas, poca actividad; y reporte de pagos por tienda.</li>
+      </ul>
+    </section>
+  </main>
+
+  <main id="view-client" class="container hidden">
+    <div class="grid grid-2">
+      <section class="card">
+        <h3 style="margin-top:0">1) Elige tu plantilla</h3>
+        <div class="grid grid-3" id="tplGallery"></div>
+        <div class="divider"></div>
+        <div class="grid grid-3">
+          <div class="flex-col">
+            <label class="label">Color principal</label>
+            <input id="themeColor" class="input" type="color" value="#5b82f5" />
+          </div>
+          <div class="flex-col">
+            <label class="label">Tipografía</label>
+            <select id="fontFamily" class="input">
+              <option value="Inter">Inter</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Raleway">Raleway</option>
+            </select>
+          </div>
+          <div class="flex-col">
+            <label class="label">Nombre de tu tienda</label>
+            <input id="storeName" class="input" placeholder="Ej: Mi Súper Tienda" />
+          </div>
+        </div>
+        <div style="margin-top:12px" class="spaced">
+          <div>
+            <span class="label">Enlace de tu tienda</span>
+            <div class="slug-link" id="slugPreview">shopintime.[nombre-de-tienda]</div>
+          </div>
+          <button class="btn primary" onclick="goNext('companyForm')">Siguiente: Registrar empresa</button>
+        </div>
+      </section>
+
+      <section class="card" id="companyForm">
+        <h3 style="margin-top:0">2) Datos de la empresa</h3>
+        <div class="grid grid-2">
+          <div class="flex-col"><span class="label">RUC</span><input id="ruc" class="input" /></div>
+          <div class="flex-col"><span class="label">Razón Social</span><input id="razonSocial" class="input" /></div>
+          <div class="flex-col"><span class="label">Rubro dedicado</span><input id="rubro" class="input" placeholder="Ej: Electrodomésticos"/></div>
+          <div class="flex-col"><span class="label">Dirección Fiscal</span><input id="direccionFiscal" class="input" /></div>
+          <div class="flex-col"><span class="label">Correo empresarial</span><input id="correo" class="input" type="email" /></div>
+          <div class="flex-col"><span class="label">Representante</span><input id="representante" class="input" /></div>
+          <div class="flex-col"><span class="label">Teléfono</span><input id="telefono" class="input" /></div>
+          <div class="flex-col"><span class="label">Link de WhatsApp</span><input id="whatsapp" class="input" placeholder="https://wa.me/"/></div>
+        </div>
+        <div class="spaced" style="margin-top:12px">
+          <span></span>
+          <button class="btn primary" onclick="goNext('aboutForm')">Siguiente: Marca & pagos</button>
+        </div>
+      </section>
+
+      <section class="card" id="aboutForm">
+        <h3 style="margin-top:0">3) Historia, redes y plan</h3>
+        <div class="grid grid-2">
+          <div class="flex-col"><span class="label">Breve historia</span><textarea id="historia" rows="4" class="input"></textarea></div>
+          <div class="flex-col"><span class="label">Eslogan</span><input id="slogan" class="input" placeholder="Ej: Calidad a un clic" /></div>
+          <div class="flex-col"><span class="label">Facebook</span><input id="facebook" class="input" placeholder="https://facebook.com/"/></div>
+          <div class="flex-col"><span class="label">Instagram</span><input id="instagram" class="input" placeholder="https://instagram.com/"/></div>
+          <div class="flex-col"><span class="label">TikTok</span><input id="tiktok" class="input" placeholder="https://tiktok.com/@"/></div>
+          <div class="flex-col"><span class="label">Métodos de pago</span>
+            <div class="flex">
+              <label><input type="checkbox" id="pagoTarjeta"> Tarjeta</label>
+              <label><input type="checkbox" id="pagoYape"> Yape/Plin</label>
+              <label><input type="checkbox" id="pagoTransfer"> Transferencia</label>
+              <label><input type="checkbox" id="pagoContra"> Contraentrega</label>
+            </div>
+          </div>
+          <div class="flex-col" style="grid-column:1/-1">
+            <label class="flex" style="gap:8px">
+              <input type="checkbox" id="aceptoPlan"> Acepto que finalizado el primer mes de prueba pagaré <b>S/5</b>, al segundo mes <b>S/10</b> y a partir del tercer mes <b>S/20</b> mensuales.
+            </label>
+          </div>
+        </div>
+        <div class="spaced" style="margin-top:12px">
+          <span></span>
+          <button class="btn primary" onclick="goNext('productsForm')">Siguiente: Productos</button>
+        </div>
+      </section>
+
+      <section class="card" id="productsForm">
+        <h3 style="margin-top:0">4) Registra tus productos</h3>
+        <div class="grid grid-4">
+          <div class="flex-col"><span class="label">Foto (URL)</span><input id="prodFoto" class="input" placeholder="https://..."/></div>
+          <div class="flex-col"><span class="label">Nombre</span><input id="prodNombre" class="input"/></div>
+          <div class="flex-col"><span class="label">Descripción</span><input id="prodDesc" class="input"/></div>
+          <div class="flex-col"><span class="label">Precio (S/)</span><input id="prodPrecio" class="input" type="number" step="0.01"/></div>
+          <div class="flex-col"><span class="label">Stock</span><input id="prodStock" class="input" type="number"/></div>
+          <div class="flex" style="margin-top:26px">
+            <button class="btn" onclick="addProduct()">Añadir producto</button>
+            <button class="btn ghost" onclick="clearProductForm()">Limpiar</button>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div id="productsList" class="grid grid-4"></div>
+        <div class="spaced" style="margin-top:16px">
+          <span></span>
+          <button class="btn primary" onclick="finishStoreSetup()">Finalizar y ver tienda</button>
+        </div>
+      </section>
+
+      <section class="card" id="clientReport">
+        <h3 style="margin-top:0">Informe de mi tienda</h3>
+        <div class="grid grid-4">
+          <div class="kpi"><div class="label">Ventas</div><div class="num" id="tiendaVentas">0</div></div>
+          <div class="kpi"><div class="label">Ingresos</div><div class="num" id="tiendaIngresos">S/ 0.00</div></div>
+          <div class="kpi"><div class="label">Valor de inventario</div><div class="num" id="tiendaInventario">S/ 0.00</div></div>
+          <div class="kpi"><div class="label">Socio desde</div><div class="num" id="tiendaSocioDesde">-</div></div>
+        </div>
+        <div class="spaced" style="margin-top:12px">
+          <div>
+            <div class="label">Enlace de tu tienda</div>
+            <span class="slug-link" id="tiendaLink">shopintime.[tienda]</span>
+            <span class="tag">Haz clic para abrir</span>
+          </div>
+          <div class="flex" style="gap:8px">
+            <button class="btn" onclick="switchView('view-shop')">Ver tienda</button>
+            <button class="btn" onclick="switchView('view-client')">Productos</button>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <h4>Registro de ventas</h4>
+        <table class="table" id="tablaVentas">
+          <thead><tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Total (S/)</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="divider"></div>
+        <h4>Inventario</h4>
+        <table class="table" id="tablaInventario">
+          <thead><tr><th>Producto</th><th>Precio</th><th>Stock</th><th>Subtotal</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <main id="view-shop" class="hidden">
+    <div id="shopRoot" class="card tpl-1" style="--primary:var(--primary); font-family:Inter">
+      <div class="shop-header">
+        <h2 id="shopTitle">Mi Tienda</h2>
+        <div class="flex">
+          <button class="btn" onclick="openCart()">Carrito (<span id="cartCount">0</span>)</button>
+        </div>
+      </div>
+      <div class="shop-grid" id="shopProducts"></div>
+    </div>
+  </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="funcion.js"></script>
+</body>
+</html>
